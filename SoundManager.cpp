@@ -3,13 +3,13 @@
 
 const double TIMEDELAY (1000.0f / 60.0f);
 
-void SoundManager::AddSound(string str, LPCSTR route)
+void SoundManager::AddSound(string str, LPCWSTR route)
 {
 	auto iter = m_Sound.find(str);
 	if (iter != m_Sound.end()) return;
 
 	mciOpen.lpstrElementName = route;
-	mciOpen.lpstrDeviceType = "mpegvideo";
+	mciOpen.lpstrDeviceType = L"mpegvideo";
 
 	mciSendCommand(NULL, MCI_OPEN, MCI_OPEN_ELEMENT | MCI_OPEN_TYPE,
 		(DWORD)(LPVOID)&mciOpen);
@@ -63,7 +63,7 @@ void SoundManager::Close(string str)
 
 void SoundManager::PlayEffect(LPCWSTR route)
 {
-	sndPlaySound("./droid_destroyed3.wav", SND_ASYNC | SND_NODEFAULT | SND_NOSTOP);
+	sndPlaySound(L"./droid_destroyed3.wav", SND_ASYNC | SND_NODEFAULT | SND_NOSTOP);
 }
 
 void SoundManager::Update()

@@ -2,20 +2,22 @@
 #include "cTime.h"
 
 
-void cTime::AddNowTime()
-{
-	nowTime = timeGetTime();
-}
 
-void cTime::AddLastTime()
+
+void cTime::Drawfps()
 {
-	lastTime = timeGetTime();
+	if (fpstime <= timeGetTime())
+	{
+		fpstime = timeGetTime() + 1000.0f;
+		cout << frameCount << endl;
+		frameCount = 0;
+	}
 }
 
 cTime::cTime()
 {
+	fpstime = timeGetTime();
 }
-
 
 cTime::~cTime()
 {

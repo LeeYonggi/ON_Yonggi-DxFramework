@@ -20,13 +20,13 @@ HWND Winmain::InitWindow(HINSTANCE hInstance)
 	wc.hInstance = hInstance;
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)COLOR_WINDOW;
-	wc.lpszClassName = "WindowClass";
+	wc.lpszClassName = L"WindowClass";
 
 	RegisterClassEx(&wc);
 	
 	return CreateWindowEx(NULL,
-		"WindowClass",
-		"DirectX9 FrameWork Base",
+		L"WindowClass",
+		L"DirectX9 FrameWork Base",
 		WS_OVERLAPPEDWINDOW,
 		GetSystemMetrics(SM_CXSCREEN) / 2 - SCREEN_WIDTH / 2, 0,
 		SCREEN_WIDTH, SCREEN_HEIGHT,
@@ -43,7 +43,7 @@ void Winmain::InitWindowRect()
 	SetWindowPos(hWnd, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER | SWP_NOMOVE);
 }
 
-void Winmain::Directx9Set() //정익선배 프레임워크
+void Winmain::Directx9Set() 
 {
 	d3d9 = Direct3DCreate9(D3D_SDK_VERSION);
 
@@ -126,7 +126,7 @@ HRESULT Winmain::Directx3D9Set() //내꺼
 
 	if (hr == S_FALSE)
 	{
-		::MessageBox(0, "CreateDevice() - FAILED", 0, 0);
+		::MessageBox(0, L"CreateDevice() - FAILED", 0, 0);
 		return S_FALSE;
 	}
 	return S_OK;
@@ -161,20 +161,26 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	winmain.InitWindowRect();
 	winmain.Directx3D9Set();
 
+	D3DXCreateSprite(DEVICE, &lp_sprite);
+
 	main.Init();
 	
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
-	RENDERINGMANAGER->Createbuffer();
-	RENDERINGMANAGER->Init();
-	RENDERINGMANAGER->View();
 
 	MSG msg;
 
-	const float frame = 1000 / 60;
 
-	TIMEMANAGER->AddLastTime();
+	const double timeScale = 0.001f;
+	const double frame = 1.0f / 60.0f;
 
+	__int64 curTime;
+	__int64 lastTime = timeGetTime();
+
+	double mainTime = 0.0f;
+	double deltaTime;
+
+	float fpstime = timeGetTime();
 	while (true)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE))
@@ -191,9 +197,20 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		}
 		else if (main.GetWAct())
 		{
-			TIMEMANAGER->AddNowTime();
-			if (TIMEMANAGER->GetDeltaTime() > frame)
+			curTime = timeGetTime();
+			deltaTime = (curTime - lastTime) * timeScale;
+
+			if (deltaTime >= 0.25f)
+				deltaTime = 0.25;
+
+			mainTime += deltaTime;
+			lastTime = curTime;
+			TIMEMANAGER->SetDeltaTime(deltaTime);
+
+			while (mainTime >= frame)
 			{
+				mainTime -= frame;
+
 				main.Update();
 
 				d3dxdevice->Clear(0, NULL, D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xff0000ff, 1.0f, 0);
@@ -202,8 +219,11 @@ int WINAPI WinMain(HINSTANCE hInstance,
 				main.Render();
 				d3dxdevice->EndScene();
 				d3dxdevice->Present(0, 0, 0, 0);
-				TIMEMANAGER->AddLastTime();
+				TIMEMANAGER->AddCount();
 			}
+#ifdef _DEBUG
+			//TIMEMANAGER->Drawfps();
+#endif
 		}
 		if (msg.message == WM_QUIT)
 			break;

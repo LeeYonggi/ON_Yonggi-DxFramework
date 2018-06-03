@@ -25,4 +25,4 @@ public:
 };
 
 template<typename T>
-T * SingleTon<T>::p = nullptr;	//생성자에 둬도 괜찮지 않을까?
+T * SingleTon<T>::p = nullptr;	

@@ -9,7 +9,7 @@ private:
 public:
 	void Init();
 	void Release();
-	void Drawtext(LPCSTR str, D3DXVECTOR2 pos, int type, Color color);
+	void Drawtext(LPCWSTR str, D3DXVECTOR2 pos, int type, Color color);
 
 	TextManager();
 	virtual ~TextManager();

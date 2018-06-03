@@ -19,18 +19,16 @@ void MainProc::Update()
 
 void MainProc::Render()
 {
-	RENDERINGMANAGER->View();
 	OBJECTMANAGER->Render();
 	SCENEMANAGER->Render();
 }
 
 void MainProc::Release()
 {
-	RENDERINGMANAGER->Release();
 	OBJECTMANAGER->ReleaseSingleton();
 	//manager delete
-	RENDERINGMANAGER->ReleaseSingleton();
 	SCENEMANAGER->ReleaseSingleton();
+	DATAMANAGER->ReleaseSingleton();
 	TIMEMANAGER->ReleaseSingleton();
 	INPUTMANAGER->ReleaseSingleton();
 	SOUNDMANAGER->ReleaseSingleton();

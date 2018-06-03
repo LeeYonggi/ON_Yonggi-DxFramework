@@ -1,15 +1,16 @@
 #pragma once
 #include "SingleTon.h"
 
-#define MAX_OBJECT_SIZE 5
+#define MAX_OBJECT_SIZE 6
 
 enum OBJECT_STATE
 {
-	OBJ_BACK		= 0,
-	OBJ_BACKGROUND	= 1,
-	OBJ_CHARACTER	= 2,
-	OBJ_EFFECT		= 3,
-	OBJ_UI			= 4
+	OBJ_CAMERA,
+	OBJ_BACK,
+	OBJ_BACKGROUND,
+	OBJ_CHARACTER,
+	OBJ_EFFECT,
+	OBJ_UI		
 };
 
 class ObjectManager :

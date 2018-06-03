@@ -45,7 +45,10 @@ using namespace std;
 #include "SingleTon.h"
 #include "Object.h"
 #include "Component.h"
-#include "RenderingManager.h"
+#include "DataManager.h"
+#include "TexVertexRenderer.h"
+#include "cCamera.h"
+//#include "RenderingManager.h"
 #include "ObjectManager.h"
 #include "SpriteRenderer.h"
 #include "InputManager.h"
@@ -56,6 +59,7 @@ using namespace std;
 #include "cSceneManager.h"
 
 //custom
+#include "Camera01.h"
 #include "Character.h"
 #include "WinMain.h"
 #include "MainScene.h"

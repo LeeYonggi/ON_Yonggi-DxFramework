@@ -1,7 +1,6 @@
 #pragma once
-
-
-class SpriteRenderer :
+#include "Component.h"
+class TexVertexRenderer :
 	public Component
 {
 private:
@@ -21,11 +20,12 @@ public:
 		D3DXVECTOR3 angle = { 0.0f, 0.0f, 0.0f },
 		Color color = Color(255, 255, 255, 255)); //Draw
 	void Render() override; //Render
-	void SetColor(Color _color) { color = _color; } 
-	void SetAnimeConfirm(bool set) { anime = set; } 
+	void SetColor(Color _color) { color = _color; }
+	void SetAnimeConfirm(bool set) { anime = set; }
 	void SetVertex(Texture *tex) { texture = tex; }
-	bool GetAnimeConfirm() { return anime; } 
+	bool GetAnimeConfirm() { return anime; }
 
-	SpriteRenderer();
-	virtual ~SpriteRenderer();
+	TexVertexRenderer();
+	virtual ~TexVertexRenderer();
 };
+

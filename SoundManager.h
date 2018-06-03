@@ -15,7 +15,7 @@ private:
 	int second;
 
 public:
-	void AddSound(string str, LPCSTR route);
+	void AddSound(string str, LPCWSTR route);
 	void Playbgm(string str, bool loop);
 	void RePlay(string str);
 	void Pause(string str);

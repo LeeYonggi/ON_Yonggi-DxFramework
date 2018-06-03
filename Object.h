@@ -1,13 +1,29 @@
 #pragma once
 
-class Component;
-class Object
+struct Transform
 {
-private:
-	bool active;
 	D3DXVECTOR3 position;
 	D3DXVECTOR3 rotation;
 	D3DXVECTOR3 scale;
+
+	Transform(D3DXVECTOR3 _position, D3DXVECTOR3 _rotation, D3DXVECTOR3 _scale)
+		:position(_position), rotation(_rotation), scale(_scale)
+	{ }
+
+	Transform() 
+	{
+		position = { 0, 0, 0};
+		rotation = { 0, 0, 0 };
+		scale = { 1.0f, 1.0f, 1.0f };
+	}
+	~Transform() { }
+};
+class Component;
+class Object
+{
+protected:
+	bool active;
+	Transform transform;
 
 public:
 	virtual void Init()		PURE;
@@ -17,6 +33,9 @@ public:
 
 	bool GetActive() { return active; }
 	void SetActive(bool _active) { active = _active; }
+	Transform GetTransform() { return transform; }
+	void SetTransform(Transform _transform) { transform = _transform; }
+	
 
 	Object();
 	virtual ~Object();
@@ -29,17 +48,17 @@ public: //component
 	{
 		Component *p = new T;
 		auto iter = components.find(p->GetTag());
-		if (iter == components.end()) { delete p; return }
+		if (iter != components.end()) { delete p;  return; }
 		p->SetObj(this);
 		components.insert(make_pair(p->GetTag(), p));
 	}
 	template<class T>
-	Component* GetComponent()
+	T *GetComponent()
 	{
-		Component p = T;
-		auto iter = components.find(p.tag);
-		if (iter == components.end()) return nullptr;
-		return iter->second;
+		Component *p = new T;
+		auto iter = components.find(p->GetTag()); delete p;
+		if (iter == components.end())  return nullptr; 
+		return dynamic_cast<T*>(iter->second);
 	}
 	map<string, Component*> M_GetComponent() { return components; }
 };

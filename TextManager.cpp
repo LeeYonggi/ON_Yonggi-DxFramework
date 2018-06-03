@@ -11,7 +11,7 @@ void TextManager::Release()
 	SAFE_RELEASE(m_lpFont01);
 }
 
-void TextManager::Drawtext(LPCSTR str, D3DXVECTOR2 pos, int type, Color color)
+void TextManager::Drawtext(LPCWSTR str, D3DXVECTOR2 pos, int type, Color color)
 {
 	RECT re = { 0 };
 

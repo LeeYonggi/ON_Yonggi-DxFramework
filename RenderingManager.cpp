@@ -103,22 +103,7 @@ void RenderingManager::DrawPrimitiveUp()
 
 void RenderingManager::View()
 {
-	D3DXMATRIX V, matRY;
-	D3DXMatrixLookAtLH(&V, &viewposition, &viewtargetPoint, &viewworldUp);
-	D3DXMatrixRotationY(&matRY, vangleY);
-	V = V * matRY;
-	d3dxdevice->SetTransform(D3DTS_VIEW, &V);
 	
-	D3DXMATRIX proj;
-	D3DXMatrixPerspectiveFovLH(
-		&proj,
-		D3DXToRadian(90),//D3DX_PI * 0.5f, // 90 - degree
-		(float)SCREEN_WIDTH / (float)SCREEN_HEIGHT,
-		1.0f,
-		1000.0f);
-	d3dxdevice->SetTransform(D3DTS_PROJECTION, &proj);
-
-	d3dxdevice->SetRenderState(D3DRS_LIGHTING, false);
 	
 	//d3dxdevice->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD);
 	//d3dxdevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
@@ -141,7 +126,7 @@ void RenderingManager::Release()
 
 }
 
-void RenderingManager::AddImage(string key, LPCSTR route)
+void RenderingManager::AddImage(string key, LPCWSTR route)
 {
 	auto iter = mTexture.find(key);
 	if (iter == mTexture.end())
