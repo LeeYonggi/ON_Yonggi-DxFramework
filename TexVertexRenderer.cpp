@@ -76,9 +76,9 @@ void TexVertexRenderer::Render()
 		if (frame <= timeGetTime())
 		{
 			frame = timeGetTime() + animedelay;
-			nowImage += TIMEMANAGER->GetDeltaTime() * 1000;
+			nowImage += TIMEMANAGER->GetDeltaTime() * 50;
 			cout << nowImage << endl;
-			if (nowImage >= iter.size() - 1)
+			if (nowImage >= iter.size())
 				nowImage = 0.0f;
 		}
 	}

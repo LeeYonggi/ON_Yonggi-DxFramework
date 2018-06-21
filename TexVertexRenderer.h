@@ -24,6 +24,8 @@ public:
 	void SetAnimeConfirm(bool set) { anime = set; }
 	void SetVertex(Texture *tex) { texture = tex; }
 	bool GetAnimeConfirm() { return anime; }
+	void SetTransform(Transform _transform) { transform = _transform; }
+	float GetNowImage() { return nowImage; }
 
 	TexVertexRenderer();
 	virtual ~TexVertexRenderer();

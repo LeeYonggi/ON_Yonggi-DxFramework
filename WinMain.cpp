@@ -2,6 +2,11 @@
 #include "MainProc.h"
 
 
+#ifdef _DEBUG
+#pragma comment(linker,"/entry:WinMainCRTStartup /subsystem:console")
+#define new new(_CLIENT_BLOCK,__FILE__,__LINE)
+#endif // _DEBUG
+
 HWND hWnd;
 LPD3DXSPRITE lp_sprite = NULL;
 LPDIRECT3DDEVICE9 lpd3dDevice = NULL;
@@ -170,15 +175,14 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	MSG msg;
 
+	const float frame = 1.0f / 60.0f;
 
-	const double timeScale = 0.001f;
-	const double frame = 1.0f / 60.0f;
+	INT64 lastTime = 0.0f;
+	INT64 nowTime = 0.0f;
+	double timeElapsed = 0.0f;
 
-	__int64 curTime;
-	__int64 lastTime = timeGetTime();
-
-	double mainTime = 0.0f;
-	double deltaTime;
+	lastTime = timeGetTime();
+	float deltatime = 0.0f;
 
 	float fpstime = timeGetTime();
 	while (true)
@@ -197,20 +201,11 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		}
 		else if (main.GetWAct())
 		{
-			curTime = timeGetTime();
-			deltaTime = (curTime - lastTime) * timeScale;
+			nowTime = timeGetTime();
+			TIMEMANAGER->SetDeltaTime((nowTime - lastTime) * 0.001f);
 
-			if (deltaTime >= 0.25f)
-				deltaTime = 0.25;
-
-			mainTime += deltaTime;
-			lastTime = curTime;
-			TIMEMANAGER->SetDeltaTime(deltaTime);
-
-			while (mainTime >= frame)
+			if(TIMEMANAGER->GetDeltaTime() >= frame)
 			{
-				mainTime -= frame;
-
 				main.Update();
 
 				d3dxdevice->Clear(0, NULL, D3DCLEAR_STENCIL | D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER, 0xff0000ff, 1.0f, 0);
@@ -220,11 +215,13 @@ int WINAPI WinMain(HINSTANCE hInstance,
 				d3dxdevice->EndScene();
 				d3dxdevice->Present(0, 0, 0, 0);
 				TIMEMANAGER->AddCount();
+
+				lastTime = timeGetTime();
 			}
-#ifdef _DEBUG
-			//TIMEMANAGER->Drawfps();
-#endif
 		}
+#ifdef _DEBUG
+			TIMEMANAGER->Drawfps();
+#endif
 		if (msg.message == WM_QUIT)
 			break;
 	}
