@@ -4,26 +4,14 @@
     <Filter Include="WinMain">
       <UniqueIdentifier>{cd55549e-29d1-47f6-9ffc-c3d98da9ad44}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrameWork">
-      <UniqueIdentifier>{515d39cf-8d29-429c-b447-d501d67c0e37}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Basics">
       <UniqueIdentifier>{5596dcde-be60-4887-bf46-afc2dd48eb6d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Scenes">
       <UniqueIdentifier>{4169d39d-7f66-47cd-bc8d-ec3f303beb6f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="FrameWork\SceneManager">
-      <UniqueIdentifier>{bcba20c8-f656-4ba2-8079-83867764d763}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FrameWork\InputManager">
-      <UniqueIdentifier>{3a29cb65-9614-4888-bb5d-6779fa2e5626}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Scenes\MainScene">
       <UniqueIdentifier>{e8399567-c266-4d21-ae79-7836837b2c4b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FrameWork\SoundManger">
-      <UniqueIdentifier>{78caa575-b5b7-4747-8584-c412cd6ac7c7}</UniqueIdentifier>
     </Filter>
     <Filter Include="Object">
       <UniqueIdentifier>{fc084259-4250-4c6c-aecd-2544c696360f}</UniqueIdentifier>
@@ -31,23 +19,8 @@
     <Filter Include="Component">
       <UniqueIdentifier>{2a56b205-5507-4767-8151-5a3c728af6b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Singleton">
-      <UniqueIdentifier>{6e308bc7-57d1-4e2b-81a6-f516cc8023d5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Singleton\ObjectManager">
-      <UniqueIdentifier>{90f8cf13-6986-4391-946f-c061707b3c6b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Object\Character">
       <UniqueIdentifier>{80061f99-70b4-4d77-b1ed-781c7805ebe1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Singleton\DataManager">
-      <UniqueIdentifier>{94cb5491-7438-4f9e-9280-bd1303a25292}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Singleton\timeManager">
-      <UniqueIdentifier>{2b9d77f5-e501-474a-ba75-d2f89244413f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="FrameWork\TextManager">
-      <UniqueIdentifier>{1604aad5-76fa-4954-8072-4fa6c67edda0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Component\SpriteRenderer">
       <UniqueIdentifier>{ae6beb92-f19c-4027-bb8b-ec90ec496301}</UniqueIdentifier>
@@ -60,6 +33,30 @@
     </Filter>
     <Filter Include="Object\Camera">
       <UniqueIdentifier>{54be723e-a0be-4a2b-a904-ac19b5f494c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton">
+      <UniqueIdentifier>{515d39cf-8d29-429c-b447-d501d67c0e37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton\TextManager">
+      <UniqueIdentifier>{1604aad5-76fa-4954-8072-4fa6c67edda0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton\SoundManger">
+      <UniqueIdentifier>{78caa575-b5b7-4747-8584-c412cd6ac7c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton\SceneManager">
+      <UniqueIdentifier>{bcba20c8-f656-4ba2-8079-83867764d763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton\InputManager">
+      <UniqueIdentifier>{3a29cb65-9614-4888-bb5d-6779fa2e5626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton\DataManager">
+      <UniqueIdentifier>{94cb5491-7438-4f9e-9280-bd1303a25292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton\ObjectManager">
+      <UniqueIdentifier>{90f8cf13-6986-4391-946f-c061707b3c6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Singleton\timeManager">
+      <UniqueIdentifier>{2b9d77f5-e501-474a-ba75-d2f89244413f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -82,7 +79,7 @@
       <Filter>WinMain</Filter>
     </ClInclude>
     <ClInclude Include="cSceneManager.h">
-      <Filter>FrameWork\SceneManager</Filter>
+      <Filter>Singleton\SceneManager</Filter>
     </ClInclude>
     <ClInclude Include="BaseScene.h">
       <Filter>Scenes</Filter>
@@ -91,28 +88,25 @@
       <Filter>Singleton\timeManager</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>FrameWork\InputManager</Filter>
+      <Filter>Singleton\InputManager</Filter>
     </ClInclude>
     <ClInclude Include="MainScene.h">
       <Filter>Scenes\MainScene</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
-      <Filter>FrameWork\SoundManger</Filter>
+      <Filter>Singleton\SoundManger</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Component</Filter>
     </ClInclude>
     <ClInclude Include="TextManager.h">
-      <Filter>FrameWork\TextManager</Filter>
+      <Filter>Singleton\TextManager</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="ObjectManager.h">
       <Filter>Singleton\ObjectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="SingleTon.h">
-      <Filter>Singleton</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
       <Filter>Component\SpriteRenderer</Filter>
@@ -132,6 +126,9 @@
     <ClInclude Include="Camera01.h">
       <Filter>Object\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="SingleTon.h">
+      <Filter>Singleton</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -144,25 +141,25 @@
       <Filter>WinMain</Filter>
     </ClCompile>
     <ClCompile Include="cSceneManager.cpp">
-      <Filter>FrameWork\SceneManager</Filter>
+      <Filter>Singleton\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="cTime.cpp">
       <Filter>Singleton\timeManager</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>FrameWork\InputManager</Filter>
+      <Filter>Singleton\InputManager</Filter>
     </ClCompile>
     <ClCompile Include="MainScene.cpp">
       <Filter>Scenes\MainScene</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
-      <Filter>FrameWork\SoundManger</Filter>
+      <Filter>Singleton\SoundManger</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Component</Filter>
     </ClCompile>
     <ClCompile Include="TextManager.cpp">
-      <Filter>FrameWork\TextManager</Filter>
+      <Filter>Singleton\TextManager</Filter>
     </ClCompile>
     <ClCompile Include="ObjectManager.cpp">
       <Filter>Singleton\ObjectManager</Filter>

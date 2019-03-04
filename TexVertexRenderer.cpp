@@ -26,19 +26,24 @@ HRESULT TexVertexRenderer::AddanimeImage(string str, LPCWSTR route, int low, int
 HRESULT TexVertexRenderer::DrawImage(Texture * tex, D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 angle, Color color)
 {
 	D3DXMATRIX matWorld, matS, matRZ, matRX, matRY, matT;
-	D3DXMatrixScaling(&matS, tex->info.Width * scale.x,
-		tex->info.Height * scale.y, scale.z);
-	D3DXMatrixRotationX(&matRX, D3DXToRadian(angle.x));
-	D3DXMatrixRotationY(&matRY, D3DXToRadian(angle.y));
-	D3DXMatrixRotationZ(&matRZ, D3DXToRadian(angle.z));
-	D3DXMatrixTranslation(&matT, pos.x, pos.y, pos.z);
+	D3DXVECTOR3 objPos, objScale, objRotate;
+	objPos = GetObject_()->GetTransform().position;
+	objScale = GetObject_()->GetTransform().scale;
+	objRotate = GetObject_()->GetTransform().rotation;
+
+	D3DXMatrixScaling(&matS, tex->info.Width * (scale.x + objScale.x),
+		tex->info.Height * (scale.y + objScale.y), scale.z + objScale.z);
+	D3DXMatrixRotationX(&matRX, D3DXToRadian(angle.x + objRotate.x));
+	D3DXMatrixRotationY(&matRY, D3DXToRadian(angle.y + objRotate.y));
+	D3DXMatrixRotationZ(&matRZ, D3DXToRadian(angle.z + objRotate.z));
+	D3DXMatrixTranslation(&matT, pos.x + objPos.x, pos.y + objPos.y, pos.z + objPos.z);
 	matWorld = matS * matRX * matRY * matRZ * matT;
 
 	//device
 	d3dxdevice->SetRenderState(D3DRS_ZWRITEENABLE, false);
 	d3dxdevice->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
 	d3dxdevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_BOTHSRCALPHA);
-	d3dxdevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_BOTHSRCALPHA); //INVSRCALPHA를 쓰면 멋진걸 볼 수 있음
+	d3dxdevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_BOTHSRCALPHA); 
 	d3dxdevice->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 
 	d3dxdevice->SetTransform(D3DTS_WORLD, &matWorld);
@@ -62,22 +67,17 @@ void TexVertexRenderer::Render()
 {
 	if (anime == false)
 	{
-		DrawImage(texture, transform.position + GetObject_()->GetTransform().position,
-			transform.scale + GetObject_()->GetTransform().scale,
-			transform.rotation + GetObject_()->GetTransform().rotation, color);
+		DrawImage(texture, transform.position, transform.scale,	transform.rotation, color);
 	}
 	else
 	{
 		auto iter = *animeTexture;
-		DrawImage(iter[(INT)nowImage], transform.position + GetObject_()->GetTransform().position,
-			transform.scale + GetObject_()->GetTransform().scale,
-			transform.rotation + GetObject_()->GetTransform().rotation, color);
+		DrawImage(iter[(INT)nowImage], transform.position, transform.scale, transform.rotation, color);
 
 		if (frame <= timeGetTime())
 		{
 			frame = timeGetTime() + animedelay;
 			nowImage += TIMEMANAGER->GetDeltaTime() * 50;
-			cout << nowImage << endl;
 			if (nowImage >= iter.size())
 				nowImage = 0.0f;
 		}
@@ -86,7 +86,6 @@ void TexVertexRenderer::Render()
 
 TexVertexRenderer::TexVertexRenderer()
 {
-	tag = "TexVertexRenderer";
 	anime = false;
 	animedelay = 0.0f;
 	frame = 0.0f;

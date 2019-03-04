@@ -79,7 +79,6 @@ void SpriteRenderer::Render()
 
 SpriteRenderer::SpriteRenderer()
 {
-	tag = "SpriteRenderer";
 	anime = false;
 	animedelay = 0.0f;
 	frame = 0.0f;

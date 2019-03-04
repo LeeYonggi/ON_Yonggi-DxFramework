@@ -48,39 +48,7 @@ void Winmain::InitWindowRect()
 	SetWindowPos(hWnd, NULL, 0, 0, rc.right - rc.left, rc.bottom - rc.top, SWP_NOZORDER | SWP_NOMOVE);
 }
 
-void Winmain::Directx9Set() 
-{
-	d3d9 = Direct3DCreate9(D3D_SDK_VERSION);
-
-	D3DPRESENT_PARAMETERS d3dpp;
-	ZeroMemory(&d3dpp, sizeof(d3dpp));
-	d3dpp.AutoDepthStencilFormat = D3DFMT_D24S8;
-	d3dpp.BackBufferCount = 1;
-	d3dpp.BackBufferFormat = D3DFMT_X8R8G8B8;
-	d3dpp.BackBufferWidth = SCREEN_WIDTH;
-	d3dpp.BackBufferHeight = SCREEN_HEIGHT;
-	d3dpp.EnableAutoDepthStencil = true;
-	d3dpp.Flags = 0;
-	d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
-	d3dpp.hDeviceWindow = hWnd;
-	d3dpp.MultiSampleQuality = 0;
-	d3dpp.MultiSampleType = D3DMULTISAMPLE_NONE;
-	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dpp.Windowed = TRUE;
-
-	d3d9->CreateDevice(
-		D3DADAPTER_DEFAULT,
-		D3DDEVTYPE_HAL,
-		hWnd,
-		D3DCREATE_MIXED_VERTEXPROCESSING,
-		&d3dpp,
-		&d3dxdevice);
-	d3d9->Release();
-	d3d9 = NULL;
-
-}
-
-HRESULT Winmain::Directx3D9Set() //³»²¨
+HRESULT Winmain::Directx3D9Set() 
 {
 	IDirect3D9 *_d3d9;
 	_d3d9 = Direct3DCreate9(D3D_SDK_VERSION);
@@ -177,14 +145,11 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 	const float frame = 1.0f / 60.0f;
 
-	INT64 lastTime = 0.0f;
-	INT64 nowTime = 0.0f;
+	double lastTime = timeGetTime();
+	double nowTime = 0.0f;
 	double timeElapsed = 0.0f;
-
-	lastTime = timeGetTime();
 	float deltatime = 0.0f;
 
-	float fpstime = timeGetTime();
 	while (true)
 	{
 		if (PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE))

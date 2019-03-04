@@ -5,6 +5,8 @@
 
 Object::Object()
 {
+	active = true;
+	destroy = false;
 }
 
 

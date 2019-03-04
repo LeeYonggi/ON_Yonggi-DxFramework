@@ -10,28 +10,32 @@ void ObjectManager::Init()
 
 void ObjectManager::ComponentUpdate()
 {
+
 	for (auto iter : m_Object)
 	{
-		for (auto _iter : *(iter.second))
-			for (auto c_iter : _iter->M_GetComponent())
-				c_iter.second->Update();
+		for (auto objects : (*iter.second))
+			for (auto components : objects->GetComponents())
+				if (objects->GetActive()) components.second->Update();
 	}
 }
 
 void ObjectManager::Update()
 {
+	ComponentUpdate();
 	for (auto iter : m_Object)
 	{
 		for (auto _iter = iter.second->begin(); _iter != iter.second->end(); )
 		{
-			if ((*_iter)->GetActive() == false)
+			if ((*_iter)->GetDestroy())
 			{
-				SAFE_RELEASE((*_iter)); SAFE_DELETE((*_iter));
+				SAFE_RELEASE((*_iter)); 
+				SAFE_DELETE((*_iter));
 				_iter = iter.second->erase(_iter);
 			}
 			else
 			{
-				(*_iter)->Update();
+				if((*_iter)->GetActive())
+					(*_iter)->Update();
 				_iter++;
 			}
 		}
@@ -42,12 +46,10 @@ void ObjectManager::Render()
 {
 	for (auto iter : m_Object)
 	{
-		for (auto _iter : *(iter.second))
-			for (auto c_iter : _iter->M_GetComponent())
-				c_iter.second->Render();
+		for (auto objects : (*iter.second))
+			for(auto components : objects->GetComponents())
+				if (objects->GetActive()) components.second->Render();
 	}
-	for (auto iter : m_Object)
-		for_each(iter.second->begin(), iter.second->end(), [](Object *obj) { obj->Render(); });
 }
 
 void ObjectManager::Release()

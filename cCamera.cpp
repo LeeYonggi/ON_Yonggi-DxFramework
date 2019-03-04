@@ -32,7 +32,6 @@ void cCamera::Render()
 
 cCamera::cCamera()
 {
-	tag = "Camera";
 }
 
 

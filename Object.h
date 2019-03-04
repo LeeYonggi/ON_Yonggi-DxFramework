@@ -23,6 +23,7 @@ class Object
 {
 protected:
 	bool active;
+	bool destroy;
 	Transform transform;
 
 public:
@@ -33,6 +34,8 @@ public:
 
 	bool GetActive() { return active; }
 	void SetActive(bool _active) { active = _active; }
+	bool GetDestroy() { return destroy; }
+	void SetDestroy(bool _destroy) { destroy = _destroy; }
 	Transform GetTransform() { return transform; }
 	void SetTransform(Transform _transform) { transform = _transform; }
 	
@@ -42,24 +45,25 @@ public:
 
 private://component
 	std::map<string, Component*> components;
+
 public: //component
 	template<class T>
-	void AddComponent()
+	T *AddComponent()	//코스트가 높기 때문에 많이쓰면 느려질 수 있음.
 	{
-		Component *p = new T;
-		auto iter = components.find(p->GetTag());
-		if (iter != components.end()) { delete p;  return; }
-		p->SetObj(this);
-		components.insert(make_pair(p->GetTag(), p));
+		auto iter = components.find(typeid(T).name());
+		if (iter != components.end()) { return dynamic_cast<T*>(iter->second); }
+		
+		T *tp = new T;
+		tp->SetObj(this);
+		components.insert(make_pair(typeid(*tp).name(), tp));
 	}
 	template<class T>
 	T *GetComponent()
 	{
-		Component *p = new T;
-		auto iter = components.find(p->GetTag()); delete p;
+		auto iter = components.find(typeid(T).name());
 		if (iter == components.end())  return nullptr; 
 		return dynamic_cast<T*>(iter->second);
 	}
-	map<string, Component*> M_GetComponent() { return components; }
+	map<string, Component*> GetComponents() { return components; }
 };
 

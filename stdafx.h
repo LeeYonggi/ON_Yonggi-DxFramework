@@ -67,4 +67,5 @@ using namespace std;
 extern LPD3DXSPRITE lp_sprite;
 extern HWND hWnd;
 extern IDirect3DDevice9 *d3dxdevice;
+
 #define DEVICE d3dxdevice

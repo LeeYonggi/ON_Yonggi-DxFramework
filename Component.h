@@ -7,8 +7,6 @@ private:
 	Object * obj;
 	bool active;
 
-protected:
-	string tag;
 
 public:
 	virtual void Init() { }
@@ -20,7 +18,6 @@ public:
 	void SetActive(bool _active) { active = _active; }
 	Object *GetObject_() { return obj; }
 	bool GetActive() { return active; }
-	string GetTag() { return tag; }
 
 	Component();
 	virtual ~Component();

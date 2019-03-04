@@ -3,7 +3,7 @@
 
 void TextManager::Init()
 {
-	D3DXCreateFont(DEVICE, 50, 0, 10, 1, false, DEFAULT_CHARSET, 0, 0, 0, TEXT("Fixedys"), &m_lpFont01);
+	D3DXCreateFont(DEVICE, 50, 0, 10, 1, false, DEFAULT_CHARSET, 0, 0, 0, TEXT("Fixedsys"), &m_lpFont01);
 }
 
 void TextManager::Release()
