@@ -14,7 +14,7 @@ HRESULT SpriteRenderer::AddImage(string str, LPCWSTR route)
 
 HRESULT SpriteRenderer::AddanimeImage(string str, LPCWSTR route, int low, int high, float animedelay)
 {
-	animeTexture = DATAMANAGER->AddanimeTexture(str, route, low, high);
+	animeTexture = DATAMANAGER->AddAnimeTexture(str, route, low, high);
 
 	transform = { { 0, 0, 0 },{ 0, 0, 0 },{ 0, 0, 0 } };
 	color = { 255, 255, 255, 255 };

@@ -12,9 +12,9 @@ HRESULT TexVertexRenderer::AddImage(string str, LPCWSTR route)
 	return S_OK;
 }
 
-HRESULT TexVertexRenderer::AddanimeImage(string str, LPCWSTR route, int low, int high, float animedelay)
+HRESULT TexVertexRenderer::AddAnimeImage(string str, LPCWSTR route, int low, int high, float animedelay)
 {
-	animeTexture = DATAMANAGER->AddanimeTexture(str, route, low, high);
+	animeTexture = DATAMANAGER->AddAnimeTexture(str, route, low, high);
 
 	transform = { { 0, 0, 0 },{ 0, 0, 0 },{ 0, 0, 0 } };
 	color = { 255, 255, 255, 255 };

@@ -15,7 +15,7 @@ private:
 
 public:
 	HRESULT AddImage(string str, LPCWSTR route); //ImageSave
-	HRESULT AddanimeImage(string str, LPCWSTR route, int low, int high, float animedelay); //animetion Image Save
+	HRESULT AddAnimeImage(string str, LPCWSTR route, int low, int high, float animedelay); //animetion Image Save
 	HRESULT DrawImage(Texture *tex, D3DXVECTOR3 pos, D3DXVECTOR3 scale = { 1.0f, 1.0f, 1.0f },
 		D3DXVECTOR3 angle = { 0.0f, 0.0f, 0.0f },
 		Color color = Color(255, 255, 255, 255)); //Draw

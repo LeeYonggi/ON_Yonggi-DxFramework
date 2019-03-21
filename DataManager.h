@@ -59,14 +59,14 @@ class DataManager :
 {
 private:
 	map<string, Texture*> m_TextureData;
-	map<string, vector<Texture*>*> m_animeData;
+	map<string, vector<Texture*>*> m_AnimeData;
 	vector<NormalTexVertex> _vertex;
 
 public:
 	Texture *AddTexture(string str, LPCWSTR route);
 	Texture *GetTexture(string str);
-	vector<Texture*>* AddanimeTexture(string str, LPCWSTR route, int low, int high);
-	vector<Texture*>* GetanimeTexture(string str);
+	vector<Texture*>* AddAnimeTexture(string str, LPCWSTR route, int low, int high);
+	vector<Texture*>* GetAnimeTexture(string str);
 	vector<NormalTexVertex> GetVertexRect() { return _vertex; }
 	DataManager();
 	virtual ~DataManager();

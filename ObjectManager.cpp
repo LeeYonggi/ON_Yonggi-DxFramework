@@ -5,7 +5,7 @@
 void ObjectManager::Init()
 {
 	for (int i = 0; i < MAX_OBJECT_SIZE; i++)
-		m_Object.insert(make_pair(OBJECT_STATE(i), new vector<Object*>));
+		m_Object.insert(make_pair(OBJECT_KIND(i), new vector<Object*>));
 }
 
 void ObjectManager::ComponentUpdate()
@@ -66,7 +66,7 @@ void ObjectManager::Release()
 	m_Object.clear();
 }
 
-Object *ObjectManager::AddObject(OBJECT_STATE state, Object * obj)
+Object *ObjectManager::AddObject(OBJECT_KIND state, Object * obj)
 {
 	auto iter = m_Object.find(state);
 	if (iter == m_Object.end()) return nullptr;

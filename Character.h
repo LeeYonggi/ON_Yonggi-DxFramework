@@ -4,7 +4,7 @@ class Character :
 	public Object
 {
 private:
-	TexVertexRenderer *m_sprite;
+	TexVertexRenderer *m_Sprite;
 public:
 	void Init();
 	void Update();

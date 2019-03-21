@@ -28,10 +28,10 @@ Texture * DataManager::GetTexture(string str)
 	return nullptr;
 }
 
-vector<Texture*>* DataManager::AddanimeTexture(string str, LPCWSTR route, int low, int high)
+vector<Texture*>* DataManager::AddAnimeTexture(string str, LPCWSTR route, int low, int high)
 {
-	auto iter = m_animeData.find(str);
-	if (iter != m_animeData.end()) return iter->second;
+	auto iter = m_AnimeData.find(str);
+	if (iter != m_AnimeData.end()) return iter->second;
 	vector<Texture*>* m_anime = new vector<Texture*>;
 	for (int i = low; i <= high; i++)
 	{
@@ -44,10 +44,10 @@ vector<Texture*>* DataManager::AddanimeTexture(string str, LPCWSTR route, int lo
 	return m_anime;
 }
 
-vector<Texture*>* DataManager::GetanimeTexture(string str)
+vector<Texture*>* DataManager::GetAnimeTexture(string str)
 {
-	auto iter = m_animeData.find(str);
-	if (iter != m_animeData.end()) return iter->second;
+	auto iter = m_AnimeData.find(str);
+	if (iter != m_AnimeData.end()) return iter->second;
 	return nullptr;
 }
 
@@ -70,7 +70,7 @@ DataManager::~DataManager()
 		SAFE_DELETE(iter.second);
 	}
 	m_TextureData.clear();
-	for (auto iter : m_animeData)
+	for (auto iter : m_AnimeData)
 	{
 		for (auto _iter : *(iter.second))
 		{
@@ -78,5 +78,5 @@ DataManager::~DataManager()
 			SAFE_DELETE(_iter);
 		}
 	}
-	m_animeData.clear();
+	m_AnimeData.clear();
 }

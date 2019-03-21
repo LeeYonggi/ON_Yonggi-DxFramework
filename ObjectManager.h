@@ -3,7 +3,7 @@
 
 #define MAX_OBJECT_SIZE 6
 
-enum OBJECT_STATE
+enum OBJECT_KIND
 {
 	OBJ_CAMERA,
 	OBJ_BACK,
@@ -17,7 +17,7 @@ class ObjectManager :
 	public SingleTon<ObjectManager>
 {
 private:
-	map<OBJECT_STATE, vector<Object*>*> m_Object;
+	map<OBJECT_KIND, vector<Object*>*> m_Object;
 public:
 	void Init();
 	void ComponentUpdate();
@@ -25,7 +25,7 @@ public:
 	void Render();
 	void Release();
 
-	Object *AddObject(OBJECT_STATE state, Object *obj);
+	Object *AddObject(OBJECT_KIND state, Object *obj);
 
 	ObjectManager();
 	virtual ~ObjectManager();
