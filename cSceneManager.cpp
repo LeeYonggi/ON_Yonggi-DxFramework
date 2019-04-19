@@ -16,6 +16,8 @@ void cSceneManager::Update()
 			scenes[pastScene]->Release();
 		scenes[updateScene]->Init();
 		scenes[updateScene]->Update();
+		OBJECTMANAGER->Release();
+		OBJECTMANAGER->Init();
 		pastScene = updateScene;
 	}
 	else
