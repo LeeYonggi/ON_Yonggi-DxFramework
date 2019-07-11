@@ -14,10 +14,13 @@ void cSceneManager::Update()
 	{
 		if(pastScene != -1)
 			scenes[pastScene]->Release();
-		scenes[updateScene]->Init();
-		scenes[updateScene]->Update();
+
 		OBJECTMANAGER->Release();
 		OBJECTMANAGER->Init();
+		
+		scenes[updateScene]->Init();
+		scenes[updateScene]->Update();
+
 		pastScene = updateScene;
 	}
 	else
